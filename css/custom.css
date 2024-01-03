@@ -36,16 +36,48 @@ header {
 ul {
     list-style: none;
 }
+
+.mensaje {
+    display: none;
+    position: absolute;
+    right:0;
+    width: 300px;
+    height: 100px;
+    margin-top:10px;
+    padding: 20px;
+    justify-content: center;
+    align-items: center;
+    transition: .5s;
+    z-index: 2;
+    background: -moz-linear-gradient(left, #741d51 0%, #e44e52 100%); /* FF3.6-15 */
+    background: -webkit-linear-gradient(left, #741d51 0%,#e44e52 100%); /* Chrome10-25,Safari5.1-6 */
+    background: linear-gradient(to right, #741d51 0%,#e44e52 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+    border-radius:10px 0 0 10px;
+}
+
+.mensaje span {
+    display: flex;
+    width: 300px;
+    height: 60%;
+    color: #FFFFFFFF;
+    text-align: center;
+    font-size:30px;
+    justify-content: center;
+    align-items: center;
+}
+
 #hero {
     background-image:url(../img/hero.jpg);
     height: 350px;
     background-size: cover;
+    z-index:1;
 }
 #encabezado {
     margin: 30px 0;
 }
 .submenu {
     position: relative;
+    z-index:3;
 }
 
 .submenu #carrito{

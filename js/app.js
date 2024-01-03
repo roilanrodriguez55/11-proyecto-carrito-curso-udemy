@@ -4,6 +4,7 @@ const contenedorCarrito = document.querySelector("#lista-carrito tbody")
 const botonVaciarCarrito = document.querySelector("#vaciar-carrito")
 const listaCursos = document.querySelector("#lista-cursos")
 let articulosCarrito = []
+
 cargarEventListeners()
 
 function cargarEventListeners() {
@@ -13,6 +14,7 @@ function cargarEventListeners() {
     carrito.addEventListener("click", eliminarCurso)
     //Evento de vaciar carrito
     botonVaciarCarrito.addEventListener("click", vaciarCarrito)
+    //Mensaje en pantalla
 }
 
 //Funciones
@@ -22,6 +24,7 @@ function agregarCurso(evt) {
     if (evt.target.classList.contains("agregar-carrito")) {
         let cursoSeleccionado = evt.target.parentElement
         leerDatosCurso(cursoSeleccionado)
+        mensajeEnPantalla("Se ha agregado un curso al carrito")
     }
 }
 
@@ -101,6 +104,7 @@ function limpiarHTML() {
 function vaciarCarrito() {
     articulosCarrito = []//limpiar el array de articulos del carrito
     limpiarHTML()//limpiar el html
+    mensajeEnPantalla()
 }
 
 //Obtener curso del carrito
@@ -125,4 +129,22 @@ function eliminarCurso(evt) {
         }
         carritoHTML()
     }
+}
+
+//Mostrar mensaje de agregar y eliminar del CSS
+function mensajeEnPantalla(mensaje) {
+    //Obtener el contenedor donde se va a mostrar el mensaje
+    const message=document.querySelector(".mensaje").children[0]
+    //Ocultar por defecto el mensaje
+    message.parentElement.style.display="none"
+    //Se modifica el texto que está dentro del span
+    message.textContent=mensaje
+    setTimeout(hideMessage,3000)
+    message.parentElement.style.display="flex"
+}
+
+//Ocultar el mensaje
+function hideMessage() {
+    const message=document.querySelector(".mensaje").children[0]
+    message.parentElement.style.display="none"
 }
