@@ -10,7 +10,7 @@ function cargarEventListeners() {
     //Cuando se agrega un curso presionando "Agregar al Carrito"
     listaCursos.addEventListener("click", agregarCurso)
     //Eliminar cursos del carrito
-    carrito.addEventListener("click",eliminarCurso)
+    carrito.addEventListener("click", eliminarCurso)
     //Evento de vaciar carrito
     botonVaciarCarrito.addEventListener("click", vaciarCarrito)
 }
@@ -39,8 +39,8 @@ function leerDatosCurso(curso) {
     let existe = articulosCarrito.some(curso => curso.id === infoCurso.id)
     if (existe) {
         //Si existe se aumenta la cantidad
-        articulosCarrito.forEach(curso=>{
-            if (curso.id===infoCurso.id){
+        articulosCarrito.forEach(curso => {
+            if (curso.id === infoCurso.id) {
                 curso.cantidad++
             }
         })
@@ -63,6 +63,7 @@ function carritoHTML() {
     articulosCarrito.forEach(curso => {
         let {imagen, titulo, precio, cantidad} = curso
         const row = document.createElement("tr")
+        row.classList.add("row")
         row.innerHTML = `
         <td>
         <img src="${imagen}" alt="foto-alternativa" width="100">
@@ -98,17 +99,31 @@ function limpiarHTML() {
 
 //Vaciar el carrito
 function vaciarCarrito() {
-    articulosCarrito=[]//limpiar el array de articulos del carrito
+    articulosCarrito = []//limpiar el array de articulos del carrito
     limpiarHTML()//limpiar el html
 }
 
+//Obtener curso del carrito
+function obtenerCantidadCurso(evt) {
+    let curso = evt.target.parentElement.parentElement
+    let cantidad = parseInt(curso.children[3].textContent)
+    return cantidad
+}
+
 //Eliminar curso del carrito
-function eliminarCurso(evt){
+function eliminarCurso(evt) {
     evt.preventDefault()
-    if (evt.target.classList.contains("borrar-curso")){
-        let cursoId=evt.target.getAttribute("data-id")
-        //Eliminar del arreglo por el data-id
-        articulosCarrito=articulosCarrito.filter(curso=>curso.id!==cursoId)
+    let cantidadCurso = obtenerCantidadCurso(evt)
+    if (evt.target.classList.contains("borrar-curso")) {
+        let cursoId = evt.target.getAttribute("data-id")
+        console.log("Cantidad de cursos del mismo tipo "+cantidadCurso)
+        if (cantidadCurso > 1) {
+            let pos = articulosCarrito.findIndex(curso => curso.id === cursoId)
+            articulosCarrito[pos].cantidad--
+        } else {
+            //Eliminar del arreglo por el data-id
+            articulosCarrito = articulosCarrito.filter(curso => curso.id !== cursoId)
+        }
         console.log(articulosCarrito)
         carritoHTML()
     }
