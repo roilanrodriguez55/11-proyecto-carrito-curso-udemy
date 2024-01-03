@@ -116,7 +116,6 @@ function eliminarCurso(evt) {
     let cantidadCurso = obtenerCantidadCurso(evt)
     if (evt.target.classList.contains("borrar-curso")) {
         let cursoId = evt.target.getAttribute("data-id")
-        console.log("Cantidad de cursos del mismo tipo "+cantidadCurso)
         if (cantidadCurso > 1) {
             let pos = articulosCarrito.findIndex(curso => curso.id === cursoId)
             articulosCarrito[pos].cantidad--
@@ -124,7 +123,6 @@ function eliminarCurso(evt) {
             //Eliminar del arreglo por el data-id
             articulosCarrito = articulosCarrito.filter(curso => curso.id !== cursoId)
         }
-        console.log(articulosCarrito)
         carritoHTML()
     }
 }
