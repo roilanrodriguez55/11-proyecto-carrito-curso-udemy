@@ -104,7 +104,7 @@ function limpiarHTML() {
 function vaciarCarrito() {
     articulosCarrito = []//limpiar el array de articulos del carrito
     limpiarHTML()//limpiar el html
-    mensajeEnPantalla()
+    mensajeEnPantalla("Se ha limpiado el carrito")
 }
 
 //Obtener curso del carrito
@@ -127,6 +127,9 @@ function eliminarCurso(evt) {
             //Eliminar del arreglo por el data-id
             articulosCarrito = articulosCarrito.filter(curso => curso.id !== cursoId)
         }
+        if (articulosCarrito.length===0){
+            mensajeEnPantalla("Se ha limpiado el carrito")
+        }
         carritoHTML()
     }
 }
@@ -134,17 +137,17 @@ function eliminarCurso(evt) {
 //Mostrar mensaje de agregar y eliminar del CSS
 function mensajeEnPantalla(mensaje) {
     //Obtener el contenedor donde se va a mostrar el mensaje
-    const message=document.querySelector(".mensaje").children[0]
+    const message = document.querySelector(".mensaje").children[0]
     //Ocultar por defecto el mensaje
-    message.parentElement.style.display="none"
+    message.parentElement.style.display = "none"
     //Se modifica el texto que está dentro del span
-    message.textContent=mensaje
-    setTimeout(hideMessage,3000)
-    message.parentElement.style.display="flex"
+    message.textContent = mensaje
+    setTimeout(hideMessage, 3000)
+    message.parentElement.style.display = "flex"
 }
 
 //Ocultar el mensaje
 function hideMessage() {
-    const message=document.querySelector(".mensaje").children[0]
-    message.parentElement.style.display="none"
+    const message = document.querySelector(".mensaje").children[0]
+    message.parentElement.style.display = "none"
 }
