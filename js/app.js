@@ -64,9 +64,8 @@ function carritoHTML() {
 
     //Recorre el carrito y genera el HTML
     articulosCarrito.forEach(curso => {
-        let {imagen, titulo, precio, cantidad} = curso
+        let {imagen, titulo, precio, cantidad,id} = curso
         const row = document.createElement("tr")
-        row.classList.add("row")
         row.innerHTML = `
         <td>
         <img src="${imagen}" alt="foto-alternativa" width="100">
@@ -81,7 +80,7 @@ function carritoHTML() {
             ${cantidad}
         </td>
         <td>
-            <a href="#" class="borrar-curso" data-id="${curso.id}">X</a>
+            <a href="#" class="borrar-curso" data-id="${id}">X</a>
         </td>
         `
         //Agrega el HTML del carrito al tbody
@@ -142,7 +141,7 @@ function mensajeEnPantalla(mensaje) {
     message.parentElement.style.display = "none"
     //Se modifica el texto que está dentro del span
     message.textContent = mensaje
-    setTimeout(hideMessage, 3000)
+    setTimeout(hideMessage, 2000)
     message.parentElement.style.display = "flex"
 }
 
